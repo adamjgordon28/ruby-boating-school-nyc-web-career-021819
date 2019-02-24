@@ -12,6 +12,7 @@ end
 spongebob = Student.new("Spongebob")
 patrick = Student.new("Patrick")
 sandy = Student.new("Sandy")
+squidward = Student.new("Squidward")
 
 puff = Instructor.new("Ms.Puff")
 krabs = Instructor.new("Mr.Krabs")
@@ -26,6 +27,7 @@ krabs.fail_student(sandy, "Start the Car")
 puff.pass_student(sandy, "Jump the Ramp")
 plankton.pass_student(sandy, "Avoid the Shark")
 sandy.add_boating_test("Reach the Surface", "passed", krabs)
+puff.fail_student(squidward,"Play Clarinet While Driving")
 
 binding.pry
 0 #leave this here to ensure binding.pry isn't the last line
