@@ -1,5 +1,4 @@
 class Student
-
   attr_reader :first_name
 
   @@all = []
@@ -9,32 +8,34 @@ class Student
     @@all << self
   end
 
-  def self.all
-    @@all
+
+
+  #adds boating test by self(ojbect), test name (string) and instructor (object)
+  def add_boating_test(test_name, test_status, instructor)
+    BoatingTest.new(self, test_name, test_status, instructor)
   end
 
-  def add_boating_test(name, status, instructor)
-    BoatingTest.new(self, name, status, instructor)
-  end
-
+#takes in a string and returns a student object
   def self.find_student(first_name)
-    self.all.find {|student|student.first_name == first_name}
+    self.all.find do |student|
+      student.first_name == first_name
+    end
   end
 
-  def grade_percentage
-    student_tests = []
-    passed_tests = []
-    BoatingTest.all.each do |test|
-      if test.student == self
-        student_tests << test
-      end
-    end
-    student_tests.each do |test|
-      if test.test_status == "passed"
-        passed_tests << test
-      end
-    end
-    (passed_tests.length.to_f)/(student_tests.length.to_f)
-  end
+#gives the float value of all passed tests divided by all taken tests for this student
+ def grade_percentage
+   all_tests = BoatingTest.all.select do |test|
+     test.student == self
+   end
+   passed_tests = all_tests.select do |test|
+     test.status == "passed"
+   end
+   passed_tests.length.to_f/all_tests.length.to_f
+ end
+
+
+ def self.all
+   @@all
+ end
 
 end

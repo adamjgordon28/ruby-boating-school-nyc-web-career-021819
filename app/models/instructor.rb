@@ -1,6 +1,5 @@
 class Instructor
-
-  attr_reader :name
+attr_accessor :name
 
   @@all = []
 
@@ -9,54 +8,38 @@ class Instructor
     @@all << self
   end
 
-  def Instructor.all
-    @@all
-  end
 
+
+  #searches all boating tests to see if there is an existing test with this student and test name, and passing if so. Creates a passing test if not.
   def pass_student(student, test_name)
-    student_tests = []
-    matching_tests = []
-    BoatingTest.all.each do |test|
-      if test.student == student
-        student_tests << test
+     matching_test = BoatingTest.all.find do |test|
+       (test.student == student) && (test.name == test_name)
+     end
+     if matching_test != nil
+       matching_test.status = "passed"
+       matching_test
+      else
+        BoatingTest.new(student, test_name, "passed", self)
       end
-    end
-    student_tests.each do |test|
-      if test.test_name == test_name
-        matching_tests << test
-      end
-    end
-    if matching_tests.length > 0
-      matching_tests.each do |test|
-        test.test_status = "passed"
-      end
-    else
-      BoatingTest.new(student, test_name, "passed", self)
-    end
   end
 
 
+#searches all boating tests to see if there is an existing test with this student and test name, and failing if so. Creates a failing test if not.
   def fail_student(student, test_name)
-    student_tests = []
-    matching_tests = []
-    BoatingTest.all.each do |test|
-      if test.student == student
-        student_tests << test
-      end
+    matching_test = BoatingTest.all.find do |test|
+      (test.student == student) && (test.name == test_name)
     end
-    student_tests.each do |test|
-      if test.test_name == test_name
-        matching_tests << test
-      end
-    end
-    if matching_tests.length > 0
-      matching_tests.each do |test|
-        test.test_status = "failed"
-      end
+    if matching_test != nil
+      matching_test.status = "failed"
+      matching_test
     else
       BoatingTest.new(student, test_name, "failed", self)
     end
   end
 
+
+  def self.all
+    @@all
+  end
 
 end

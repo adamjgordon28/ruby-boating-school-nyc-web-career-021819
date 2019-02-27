@@ -11,23 +11,27 @@ end
 # so they will be available to test and play around with in your console
 spongebob = Student.new("Spongebob")
 patrick = Student.new("Patrick")
-sandy = Student.new("Sandy")
 squidward = Student.new("Squidward")
+sandy = Student.new("Sandy")
 
-puff = Instructor.new("Ms.Puff")
-krabs = Instructor.new("Mr.Krabs")
-plankton = Instructor.new("Plankton!")
+puff = Instructor.new("Mrs. Puff")
+krabbs = Instructor.new("Mr. Krabbs")
+plankton = Instructor.new("Plankton")
 
-no_crashing = spongebob.add_boating_test("Don't Crash 101", "pending", puff)
-power_steering_failure = patrick.add_boating_test("Power Steering 202", "failed", puff)
-power_steering_pass = patrick.add_boating_test("Power Steering 201", "passed", krabs)
-puff.pass_student(patrick, "Gumball Machine Dodge")
-puff.fail_student(patrick, "Electric Eel Swerve")
-krabs.fail_student(sandy, "Start the Car")
-puff.pass_student(sandy, "Jump the Ramp")
-plankton.pass_student(sandy, "Avoid the Shark")
-sandy.add_boating_test("Reach the Surface", "passed", krabs)
-puff.fail_student(squidward,"Play Clarinet While Driving")
+spongebob.add_boating_test("Dodge the Electric Eel","failed", puff)
+spongebob.add_boating_test("Jellyfish! Drive away!", "passed", plankton)
+patrick.add_boating_test("Escape the Shark!", "failed", krabbs)
+sandy.add_boating_test("Don't Hit the Krusty Krab!", "passed", krabbs)
+spongebob.add_boating_test("Avoid the cones!", "failed", krabbs)
+squidward.add_boating_test("Play Clarinet While Driving", "failed", puff)
+
+puff.fail_student(patrick, "Buckle Up!")
+plankton.pass_student(sandy, "Get me the Secret Krabby Patty Formula!")
+krabbs.fail_student(sandy, "I can't believe you gave away my formuler. You fail the driving test!!")
+
+
+
+
 
 binding.pry
 0 #leave this here to ensure binding.pry isn't the last line
